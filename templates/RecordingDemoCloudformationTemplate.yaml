@@ -6,22 +6,22 @@ Transform: 'AWS::Serverless-2016-10-31'
 Parameters:
   ECSTaskCpu:
     Type: Number
-    Default: 4096
+    Default: 512
   ECSTaskMemory:
     Type: Number
-    Default: 8192
+    Default: 1000
   ECSContainerName:
     Type: String
     Default: 'recording-demo-container'
   ECSContainerCpu:
     Type: Number
-    Default: 4096
+    Default: 512
   ECSContainerMemory:
     Type: Number
-    Default: 8192
+    Default: 1000
   ECSContainerMemoryReservation:
     Type: Number
-    Default: 8192
+    Default: 1024
   EcsClusterName:
     Type: String
     Description: 'Specifies the ECS Cluster Name with which the resources would be associated'
@@ -34,10 +34,10 @@ Parameters:
     Default: 1
   EcsAsgMaxSize:
     Type: Number
-    Default: 5
+    Default: 3
   DesiredCapacity:
     Type: Number
-    Default: 2
+    Default: 1
     Description: Number of instances to launch in your ECS cluster.
   ImageId:
     Type: AWS::SSM::Parameter::Value<AWS::EC2::Image::Id>
@@ -46,7 +46,7 @@ Parameters:
   InstanceType:
     Description: EC2 instance type
     Type: String
-    Default: t3.xlarge
+    Default: m5.2xlarge
     AllowedValues: [mt2.large, t2.xlarge, t2.2xlarge, t3.large, t3.xlarge, t3.2xlarge, m4.large, m4.xlarge, 
     m4.2xlarge, m4.4xlarge, m5.large, m5.xlarge, m5.2xlarge, m5.4xlarge, m5.8xlarge, c4.xlarge, c4.2xlarge, 
     c4.4xlarge, c5.large, c5.xlarge, c5.2xlarge, c5.4xlarge]
@@ -162,7 +162,7 @@ Resources:
                   awslogs-stream-prefix:
                     Ref: ECSContainerName
               LinuxParameters:
-                SharedMemorySize: 2048
+                SharedMemorySize: 1000
 
   ECSCluster:
     Type: 'AWS::ECS::Cluster'
